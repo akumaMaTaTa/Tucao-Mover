@@ -4,13 +4,13 @@ from setuptools import setup
 
 setup(
     # GETTING-STARTED: set your app name:
-    name='YourAppName',
+    name='TuCaoMover',
     # GETTING-STARTED: set your app version:
     version='1.0',
     # GETTING-STARTED: set your app description:
     description='OpenShift App',
     # GETTING-STARTED: set author name (your name):
-    author='Your Name',
+    author='No one',
     # GETTING-STARTED: set author email (your email):
     author_email='example@example.com',
     # GETTING-STARTED: set author url (your url):
