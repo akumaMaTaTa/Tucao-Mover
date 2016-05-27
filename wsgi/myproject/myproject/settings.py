@@ -34,6 +34,7 @@ from socket import gethostname
 ALLOWED_HOSTS = [
     gethostname(), # For internal OpenShift load balancer security purposes.
     os.environ.get('OPENSHIFT_APP_DNS'), # Dynamically map to the OpenShift gear name.
+    '127.0.0.1','localhost'
     #'example.com', # First DNS alias (set up in the app)
     #'www.example.com', # Second DNS alias (set up in the app)
 ]
@@ -48,6 +49,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'auth.apps.AuthConfig'
 )
 
 MIDDLEWARE_CLASSES = (
