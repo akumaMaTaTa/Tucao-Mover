@@ -1,13 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 def index(request):
-	cookie = request.COOKIES.get('key','default')
+	#cookie = request.COOKIES.get('key','default')
+	print request.user.is_authenticated()
+	if request.user.is_authenticated():
 
-	if not cookie == 'default':
+	#if cookie!='default':
 		# redirect to homepage
-		return HttpResponse("homepage cookie %s" % cookie)
+		user = request.user
+		return HttpResponse("homepage user %s" % str(user))
 	else:
 		#redirect to login
-		return render(request, 'auth/login.html')
+		return redirect('login')
 		#return HttpResponse("login")
