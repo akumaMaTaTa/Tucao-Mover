@@ -1,4 +1,4 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response,redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login 
 from django.contrib.auth.models import User
@@ -35,14 +35,15 @@ def registration(request):
 		username = request.POST.get('username')
 		password = request.POST.get('password')
 		email = request.POST.get('email')
-		print username,password
 		try:
 			user = User.objects.create_user(username,email,password)
-			print user
+			return HttpResponse("Succes")
 		except Exception,e:
+			return render(request,'auth/login.html',)
 			print e
 		
-		return HttpResponse("Succes")
+		
 	else:
+		print request
 		return render(request,'auth/registration.html')
 
