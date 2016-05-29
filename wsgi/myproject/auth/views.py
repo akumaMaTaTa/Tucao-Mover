@@ -9,24 +9,24 @@ def login_user(request):
 	username= ""
 	password= ""
 	print request.POST
+	state="Please login"
 	if request.POST:
 		username = request.POST.get('username')
 		password = request.POST.get('password')
-		state="Please login"
+		
 		user = authenticate(username = username, password = password )
+		# log in succes
 		if user is not None:
-			print user.is_active
 			login(request,user)
 			return HttpResponse("Succes")
+		# log in failed
 		else:
 			state="Username or password incorrect."
-			print state
-			return render(request,'auth/login.html')
+			return render(request,'auth/login.html',{'state' : state})
 
 
 	else:
-		#render(request, 'auth/login.html')
-		return render(request,'auth/login.html')
+		return render(request,'auth/login.html',{'state': state})
 
 def registration(request):
 	username=""
@@ -37,5 +37,5 @@ def registration(request):
 		user = User.objects.create_user(username=username, password=password)
 		return HttpResponse("Succes")
 	else:
-		return HttpResponse("Fail")
+		return render(request,'auth/registration.html')
 
