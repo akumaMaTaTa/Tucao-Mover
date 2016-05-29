@@ -22,11 +22,11 @@ def login_user(request):
 		# log in failed
 		else:
 			state="Username or password incorrect."
-			return render(request,'auth/login.html',{'state' : state})
+			return render(request,'auth/login.html')
 
 
 	else:
-		return render(request,'auth/login.html',{'state': state})
+		return render(request,'auth/login.html')
 
 def registration(request):
 	username=""
@@ -34,7 +34,14 @@ def registration(request):
 	if request.POST:
 		username = request.POST.get('username')
 		password = request.POST.get('password')
-		user = User.objects.create_user(username=username, password=password)
+		email = request.POST.get('email')
+		print username,password
+		try:
+			user = User.objects.create_user(username,email,password)
+			print user
+		except Exception,e:
+			print e
+		
 		return HttpResponse("Succes")
 	else:
 		return render(request,'auth/registration.html')
