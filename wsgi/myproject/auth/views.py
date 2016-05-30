@@ -18,11 +18,12 @@ def login_user(request):
 		# log in succes
 		if user is not None:
 			login(request,user)
+			print user.username,user.password
 			return HttpResponse("Succes")
 		# log in failed
 		else:
 			state="Username or password incorrect."
-			return render(request,'auth/login.html')
+			return render(request,'auth/login.html',{'error_log':state})
 
 
 	else:
@@ -39,11 +40,9 @@ def registration(request):
 			user = User.objects.create_user(username,email,password)
 			return HttpResponse("Succes")
 		except Exception,e:
-			return render(request,'auth/login.html',)
-			print e
+			return render(request,'auth/login.html',{'error_sign':"username existed"})
 		
 		
 	else:
-		print request
-		return render(request,'auth/registration.html')
+		return render(request,'auth/login.html')
 
